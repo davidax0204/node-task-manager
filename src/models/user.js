@@ -56,6 +56,18 @@ const userSchema = new mongoose.Schema({
     }]
 })
 
+// it runs automatically each time we send back the user (JSON)
+userSchema.methods.toJSON = function()
+{
+    const user = this
+    const userObject = user.toObject()
+
+    delete userObject.password
+    delete userObject.tokens
+
+    return userObject
+}
+
 // must be a function and not an arrown function becuase we are using the 'this'
 userSchema.methods.generateAuthToken = async function  ()
 {

@@ -6,10 +6,10 @@ const auth = async (req,res,next) =>
     try
     {
         const token = req.header('Authorization').replace('Bearer ','')
-        console.log("Token :",token)
+        // console.log("Token :",token)
         // from user - generateAuthToken
         const decoded = jwt.verify(token, 'thisismycourse')
-        console.log("decoded " , decoded)
+        // console.log("decoded " , decoded)
         const user = await User.findOne({ _id: decoded._id, 'tokens.token': token})
         // console.log("User : ",user)
         if(!user)
